@@ -1,0 +1,58 @@
+      - name: dpkg
+        shell: dpkg --configure -a
+
+      - name: Gather Package facts
+        package_facts:
+          manager: auto
+
+      - name: Install useful packages
+        apt:
+          update_cache: yes
+          cache_valid_time: 3600
+          name:
+          - curl
+          - smartmontools
+          - iftop
+          - traceroute
+          - nmap
+          - net-tools
+          - rsyslog
+          - zip
+          state: latest
+
+      - name: Install qemu-guest-agent
+        apt:
+          name:
+          - qemu-guest-agent
+          state: latest
+        when: VM
+
+      - name: Remove package file
+        apt:
+          name:
+          - snapd
+          purge: yes
+          state: absent
+
+      - name: Removing snapd files
+        file:
+          path: "{{ item }}"
+          state: absent
+        loop:
+          - /snap
+          - /var/snap
+          - /var/lib/snapd
+
+      - name: Change resolved.conf
+        lineinfile:
+          dest: /etc/systemd/resolved.conf
+          state: present
+          regexp: '^DNSStubListener='
+          line: 'DNSStubListener=no'
+        notify: Restart systemd-resolved
+
+      - name: Link for resolv.config
+        file:
+          src: "/run/systemd/resolve/resolv.conf"
+          dest: "/etc/resolv.conf"
+          state: link
