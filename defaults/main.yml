@@ -2,3 +2,4 @@
 # defaults file for base
 
 VM: false
+noCT: true

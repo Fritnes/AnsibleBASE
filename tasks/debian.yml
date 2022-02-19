@@ -50,6 +50,7 @@
           regexp: '^DNSStubListener='
           line: 'DNSStubListener=no'
         notify: Restart systemd-resolved
+        when: noCT
 
       - name: Link for resolv.config
         file:
