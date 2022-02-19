@@ -18,6 +18,7 @@
           - net-tools
           - rsyslog
           - zip
+          - htop
           state: latest
 
       - name: Install qemu-guest-agent
