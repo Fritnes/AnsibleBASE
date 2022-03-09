@@ -59,3 +59,4 @@
           dest: "/etc/resolv.conf"
           state: link
         when: noCT
+        ignore_errors: yes
