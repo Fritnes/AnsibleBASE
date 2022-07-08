@@ -1,0 +1,25 @@
+---
+#Task for debian based firewall
+- name: Install useful packages
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name:
+    - nftables
+    - fail2ban
+    state: latest
+  notify: Restart nftables
+
+- name: Change fail2ban service
+  lineinfile:
+    dest:  /lib/systemd/system/fail2ban.service
+    state: present
+    regexp: '^PartOf='
+    line: 'PartOf=nftables.service'
+  notify: Restart fail2ban
+
+- name: Copy default config
+  template:
+    src: jail.local.j2
+    dest: /etc/fail2ban/jail.local
+  notify: Restart fail2ban

@@ -4,3 +4,9 @@
 VM: false
 noCT: true
 set_timezone: Europe/Kiev
+
+#Fail2ban
+f2b_bantime: 86400
+f2b_findtime: 600
+f2b_maxretry: 3
+f2b_ignoreip: 127.0.0.1/8 ::1 103.1.2.3
