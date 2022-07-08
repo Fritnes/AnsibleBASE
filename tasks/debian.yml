@@ -63,3 +63,11 @@
           state: link
         when: noCT
         ignore_errors: yes
+
+      - name: Update Timezone
+        copy: content="{{set_timezone}}\n" dest=/etc/timezone owner=root group=root mode=0644
+        register: timezone
+
+      - name: Reconfigure Timezone Data (if changed)
+        shell: dpkg-reconfigure -f noninteractive tzdata
+        when: timezone.changed
