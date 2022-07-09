@@ -6,7 +6,8 @@
     - ufw
     purge: yes
     state: absent
-  register: nftables_config
+  register: ufw_remove
+  notify: Disable ufw
 
 - name: Install nftables packages
   apt:
@@ -22,7 +23,7 @@
     src: nftables.conf.j2
     dest: /etc/nftables.conf
   notify: Restart nftables
-  when: nftables_config.changed
+  when: ufw_remove.changed or nftables_config.changed
 
 - name: Install fail2ban packages
   apt:
