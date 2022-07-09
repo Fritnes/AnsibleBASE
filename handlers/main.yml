@@ -20,11 +20,3 @@
       enabled: yes
       daemon_reload: yes
       name: "nftables"
-
-  - name: Disable ufw
-    systemd:
-      state: stopped
-      enabled: no
-      daemon_reload: yes
-      masked: yes
-      name: "ufw"

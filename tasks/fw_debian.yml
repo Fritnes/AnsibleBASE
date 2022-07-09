@@ -7,7 +7,10 @@
     purge: yes
     state: absent
   register: ufw_remove
-  notify: Disable ufw
+
+- name: Disable & Mask UFW
+  shell: systemctl stop ufw; systemctl disable ufw; systemctl mask ufw
+  when: ufw_remove.changed
 
 - name: Install nftables packages
   apt:
