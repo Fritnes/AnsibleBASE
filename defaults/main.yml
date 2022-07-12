@@ -2,6 +2,8 @@
 # defaults file for base
 
 VM: false
+#HYPERVISOR KVM or VMware
+HYPERVISOR: KVM
 noCT: true
 set_timezone: Europe/Kiev
 

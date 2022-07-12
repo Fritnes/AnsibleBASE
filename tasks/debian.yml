@@ -31,7 +31,14 @@
           name:
           - qemu-guest-agent
           state: latest
-        when: VM
+        when: VM and HYPERVISOR == "KVM"
+
+      - name: Install open-vm-tools
+        apt:
+          name:
+          - open-vm-tools
+          state: latest
+        when: VM and HYPERVISOR == "VMware"
 
       - name: Remove package file
         apt:
