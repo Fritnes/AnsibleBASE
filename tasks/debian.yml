@@ -76,6 +76,7 @@
       - name: Change file /etc/apt/trusted.gpg
         file:
           path: /etc/apt/trusted.gpg
+          state: touch
 
       - name: Link for trusted.gpg
         file:
