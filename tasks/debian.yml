@@ -73,6 +73,12 @@
         when: noCT
         ignore_errors: yes
 
+      - name: Link for trusted.gpg
+        file:
+          src: "/etc/apt/trusted.gpg"
+          dest: "/etc/apt/trusted.gpg.d/trusted.gpg"
+          state: link
+
       - name: Update Timezone
         copy: content="{{set_timezone}}\n" dest=/etc/timezone owner=root group=root mode=0644
         register: timezone
