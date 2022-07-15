@@ -73,10 +73,11 @@
         when: noCT
         ignore_errors: yes
 
-      - name: Change file /etc/apt/trusted.gpg
-        file:
-          path: /etc/apt/trusted.gpg
-          state: touch
+      - name: Create /etc/apt/trusted.gpg
+        copy:
+          content: ""
+          dest: /etc/apt/trusted.gpg
+          force: no
 
       - name: Link for trusted.gpg
         file:
