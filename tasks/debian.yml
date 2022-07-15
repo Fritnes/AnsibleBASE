@@ -73,6 +73,10 @@
         when: noCT
         ignore_errors: yes
 
+      - name: Change file /etc/apt/trusted.gpg
+        file:
+          path: /etc/apt/trusted.gpg
+
       - name: Link for trusted.gpg
         file:
           src: "/etc/apt/trusted.gpg"
