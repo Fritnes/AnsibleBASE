@@ -92,6 +92,3 @@
       - name: Reconfigure Timezone Data (if changed)
         shell: dpkg-reconfigure -f noninteractive tzdata
         when: timezone.changed
-
-      - name: Firewall Debian
-        include: "fw_debian.yml"
